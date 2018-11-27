@@ -2,8 +2,12 @@ window.view = {
 	numbers: new Array(),
 	lastRedDiv: new Object(),
 	nextRedDiv: new Object(),
-	i: 1,
+	i: 0,
 	j: 0,
+	low:0,
+	pivot:0,
+	temp:0,
+	high:0,
 	key: 0,
 	m: 0,
 	changeClass: function(id, className) {
@@ -206,23 +210,102 @@ window.view = {
 	sortArray: function() {
 		this.lastRedDiv = this.getLastHighlightedDiv()
 		this.nextRedDiv = this.getNextDivToHighlight(this.lastRedDiv)
-		if ( this.lastRedDiv.id === 'line4' ) {
+		if ( this.lastRedDiv.id === 'Line6' ) {
 			this.showElementAsSorted()
-			if ( this.i < this.numbers.length ) {
+			if ( this.low < this.high ) {
 				this.highlightNextStep()
 			}
 			else {
-				this.nextRedDiv = this.jumpTo('line15')
+				this.nextRedDiv = this.jumpTo('line33')
+				this.highlightNextStep()
+			}
+		
+		if ( this.lastRedDiv.id === 'line8' ) {
+			this.highlightNextStep()
+			this.pivot = this.low
+		}
+		if( this.lastRedDiv.id === 'Line9')
+		{
+			this.highlightNextStep()
+			this.i=this.low
+		}
+		if( this.lastRedDiv.id === 'Line10')
+		{
+			this.highlightNextStep()
+		    this.j=this.high
+		}
+		if( this.lastRedDiv.id === 'Line11')
+		{
+			if(this.i<this.j)
+			{
 				this.highlightNextStep()
 			}
 		}
-		else if ( this.lastRedDiv.id === 'line7' ) {
-			this.setKey()
+		if( this.lastRedDiv.id === 'Line13')
+		{
 			this.highlightNextStep()
-			this.j = this.i - 1
-			this.key = this.numbers[this.i]
+				while (this.A[i] <= this.A[pivot] && this.i <= this.high)
+				{
+					this.i=this.i+1;
+				}
 		}
-		else if ( this.lastRedDiv.id === 'line8' ) {
+		if( this.lastRedDiv.id === 'Line17')
+		{
+			this.highlightNextStep()
+				while  (this.A[j] > this.A[pivot] && this.j >= this.low)
+				{
+					this.j=this.j-1;
+				}
+		}
+
+		if( this.lastRedDiv.id === 'Line21')
+		{
+		    if(this.i<this.j)
+		    {
+			this.temp=this.A[i];
+			this.A[i]=this.A[j];
+			this.A[j]=this.temp;
+		    }
+		}
+         
+		}
+		
+		if( this.lastRedDiv.id === 'Line28')
+		{
+			this.highlightNextStep()
+			this.temp=temp.A[j]
+		}
+		
+		if( this.lastRedDiv.id === 'Line29')
+		{
+			this.highlightNextStep()
+			this.A[j]=this.A[pivot]
+		}
+			
+		if( this.lastRedDiv.id === 'Line30')
+		{
+			this.highlightNextStep()
+			this.A[pivot]=this.temp
+		}	
+		
+		
+		if( this.lastRedDiv.id === 'Line31')
+		{
+			this.highlightNextStep()
+			this.quicksort(low, j - 1);
+			
+		}	
+		
+		if( this.lastRedDiv.id === 'Line31')
+		{
+			this.highlightNextStep()
+			this.quicksort(j+1,high);
+			
+		}	
+	}
+		
+/*
+		else if ( this.lastRedDiv.id === 'line9' ) {
 			if ( this.j >= 0 && this.numbers[this.j] > this.key )
 				this.highlightNextStep()
 			else {
@@ -263,8 +346,9 @@ window.view = {
 			this.clearDivs()
 		}
 		else
-			this.highlightNextStep()
-	},
+			this.highlightNextStep()    */
+ 	},
+	
 	init: function() {
 		this.activateEvents()
 	}
